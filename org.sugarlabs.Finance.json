@@ -26,7 +26,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/sugarlabs/finance-activity",
-                    "commit": "19e89928bc6361bcb418f9062adc6548307fb49b"
+                    "commit": "a067636bcc48c45234fd362337e3d905c5a5ec44"
                 },
                 {
                     "type": "patch",

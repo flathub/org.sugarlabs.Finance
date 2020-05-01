@@ -1,8 +1,8 @@
 diff --git a/finance.py b/finance.py
-index 24022e0..bcd43b0 100644
+index c222b57..fa83b3e 100644
 --- a/finance.py
 +++ b/finance.py
-@@ -40,14 +40,15 @@ from sugar3.graphics.radiotoolbutton import RadioToolButton
+@@ -41,14 +41,15 @@ from sugar3.graphics.radiotoolbutton import RadioToolButton
  from sugar3.graphics import style
  
  from sugar3.activity.widgets import StopButton
@@ -20,7 +20,7 @@ index 24022e0..bcd43b0 100644
  
  # Import screen classes.
  import registerscreen
-@@ -82,9 +83,9 @@ FOREVER = 4
+@@ -83,9 +84,9 @@ FOREVER = 4
  # and options. Screens are stored in a stack, with the currently
  # active screen on top.
  
@@ -32,7 +32,7 @@ index 24022e0..bcd43b0 100644
          self.set_title(_("Finance"))
          self.max_participants = 1
  
-@@ -214,7 +215,7 @@ class Finance(activity.Activity):
+@@ -216,7 +217,7 @@ class Finance(activity.Activity):
  
          self.toolbar_box = ToolbarBox()
  
@@ -41,7 +41,7 @@ index 24022e0..bcd43b0 100644
          self.toolbar_box.toolbar.insert(activity_button, 0)
          activity_button.show()
  
-@@ -248,7 +249,7 @@ class Finance(activity.Activity):
+@@ -250,7 +251,7 @@ class Finance(activity.Activity):
          export_data.props.hide_tooltip_on_click = False
          export_data.palette_invoker.props.toggle_palette = True
          export_data.show()
@@ -50,7 +50,7 @@ index 24022e0..bcd43b0 100644
          menu_box = PaletteMenuBox()
          export_data.props.palette.set_content(menu_box)
  
-@@ -904,29 +905,11 @@ class Finance(activity.Activity):
+@@ -906,29 +907,11 @@ class Finance(activity.Activity):
              fd.close()
  
      def __save_image_cb(self, widget):
@@ -66,13 +66,13 @@ index 24022e0..bcd43b0 100644
 -        journal_entry.file_path = image_file.name
 -
 -        # generate the preview
--        preview_str = io.StringIO()
+-        preview_str = io.BytesIO()
 -        self.chart.generate_image(preview_str, activity.PREVIEW_SIZE[0],
 -                                  activity.PREVIEW_SIZE[1])
 -        journal_entry.metadata['preview'] = dbus.ByteArray(
 -            preview_str.getvalue())
 -
--        logging.error('Create %s image file', image_file.name)
+-        logging.debug('Create %s image file', image_file.name)
 -        datastore.write(journal_entry)
 -        self._show_journal_alert(
 -            _('Chart created'), _('Open in the Journal'),
@@ -85,16 +85,13 @@ index 24022e0..bcd43b0 100644
  
      def _show_journal_alert(self, title, msg, object_id):
          open_alert = Alert()
-@@ -1027,21 +1010,12 @@ class Finance(activity.Activity):
+@@ -1029,21 +1012,11 @@ class Finance(activity.Activity):
          chart_params['chart_data'] = data
  
          logging.debug('chart_data %s', chart_params)
-+        self.export_data.props.palette.popdown(immediate=True)
- 
-+        chooser = DesktopSaveChooser(self, filename=_("Untitled")+'.json')
-+        filename = chooser.get_filename()
-         # save to the journal
--        data_file = tempfile.NamedTemporaryFile(mode='w+b', suffix='.json')
+-
+-        # save to the journal
+-        data_file = tempfile.NamedTemporaryFile(mode='w', suffix='.json')
 -        journal_entry = datastore.create()
 -        journal_entry.metadata['title'] = title
 -        journal_entry.metadata['keep'] = '0'
@@ -110,6 +107,10 @@ index 24022e0..bcd43b0 100644
 -        self._show_journal_alert(
 -            _('Exported data'), _('Open in the Journal'),
 -            journal_entry.object_id)
++        self.export_data.props.palette.popdown(immediate=True)
++
++        chooser = DesktopSaveChooser(self, filename=_("Untitled")+'.json')
++        filename = chooser.get_filename()
 +        if filename:
 +            with open(filename, 'w') as w:
 +                json.dump(chart_params, w)
