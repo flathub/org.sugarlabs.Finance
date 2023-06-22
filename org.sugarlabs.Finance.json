@@ -1,9 +1,9 @@
 {
     "app-id": "org.sugarlabs.Finance",
     "base": "org.sugarlabs.BaseApp",
-    "base-version": "22.06",
+    "base-version": "23.06",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "42",
+    "runtime-version": "44",
     "sdk": "org.gnome.Sdk",
     "separate-locales": false,
     "command": "sugarapp",
@@ -26,7 +26,12 @@
                 {
                     "type": "git",
                     "url": "https://github.com/sugarlabs/finance-activity",
-                    "commit": "a067636bcc48c45234fd362337e3d905c5a5ec44"
+                    "tag": "v15",
+                    "commit": "a067636bcc48c45234fd362337e3d905c5a5ec44",
+                    "x-checker-data": {
+                        "type": "git",
+                        "tag-pattern": "^v([\\d.]+)$"
+                    }
                 },
                 {
                     "type": "patch",
