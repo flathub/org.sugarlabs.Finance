@@ -2,7 +2,7 @@ diff --git a/activity/activity.info b/activity/activity.info
 index 7d82acd..f63ad19 100644
 --- a/activity/activity.info
 +++ b/activity/activity.info
-@@ -3,19 +3,18 @@ name = Finance
+@@ -3,19 +3,19 @@ name = Finance
  activity_version = 15
  license = GPLv3+
  host_version = 1
@@ -32,3 +32,4 @@ index 7d82acd..f63ad19 100644
 +screenshots = https://raw.githubusercontent.com/sugarlabs/finance-activity/master/screenshots/en/1.png https://raw.githubusercontent.com/sugarlabs/finance-activity/master/screenshots/en/2.png https://raw.githubusercontent.com/sugarlabs/finance-activity/master/screenshots/en/3.png
 +update_contact = tch@sugarlabs.org
 +developer_name = Sugar Labs Community
++developer_id = org.sugarlabs
